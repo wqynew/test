@@ -7,10 +7,13 @@ Created on Wed Feb 27 14:06:42 2019
 import argparse
 import sys
 import os
+import torch
     
 import multiprocessing as mp
 import threading as td
 import time
+import tensorflow as tf
+
 
 def job(q,c):
     res = c
@@ -20,7 +23,6 @@ def job(q,c):
     
 def multcore(c):
     q = mp.Queue()
-    #要把q放入参数中,若只有q一个参数，一定要加逗号，否则会报错
     p1 = mp.Process(target=job,args=(q,c,))
     p2 = mp.Process(target=job,args=(q,c,))
     p1.start()
@@ -37,9 +39,17 @@ if __name__=='__main__':
     args = parser.parse_args()
     args.ite=args.ite+1
     sys.stdout.write(str(args.ite))
+    
     print (args.ite)
+    x = torch.empty(5, 3)
+    print('torch:',x)
+    print('tensorflow:', tf.add(1, 2))
+
     st = time.time()
     multcore(args.ite)
     st3 = time.time()
     print('multicode time:',st3 - st)
+    
+
+
 
