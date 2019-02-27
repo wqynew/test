@@ -71,6 +71,8 @@ def gen_script_for_each_xml(ite,root_path, built_binary_path, gen_scripts_path, 
     #script += '#SBATCH --mem=1G\n'
     script += '#SBATCH -t 1\n'
     script += '#SBATCH -n 1\n'
+    script+='#SBATCH --mem-per-cpu=128\n'
+    script+='#SBATCH --share\n'
     #script += '#SBATCH --mem-per-cpu=128\n'
     script += 'python ' + root_path +'/' + built_binary_path + ' '
     script += str(ite) + '\n'
