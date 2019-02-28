@@ -79,9 +79,15 @@ def gen_script_for_each_xml(ite,root_path, built_binary_path, gen_scripts_path, 
     script+='module load cuDNN/v7.2.1\n'
     script+='module load cuda/9.1.85\n'
     script+='module load pytorch/0.4.1\n'
-    script+='module load tensorflow-python3\n'
+    script+='module load tensorflow\n'
     #script += '#SBATCH --mem-per-cpu=128\n'
-    script += 'tensorflow ' + root_path +'/' + built_binary_path + ' '
+    script+='singularity shell \\\n'
+    script+='--bind /lustre \\\n'
+    script+='--bind /usr/local/nvidia/${NVIDIA_VERSION}:/usr/local/nvidia \\\n'
+    script+='$TFLOW_SING_IMAGEFILE <<EOF\n'
+    script+='python -c "import tensorflow"\n'
+    script+='EOF\n'
+    script += 'python ' + root_path +'/' + built_binary_path + ' '
     script += str(ite) + '\n'
 
     f.write(script)
