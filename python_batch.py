@@ -73,7 +73,9 @@ def gen_script_for_each_xml(ite,root_path, built_binary_path, gen_scripts_path, 
     script += '#SBATCH -n 2\n'
     script+='#SBATCH --mem-per-cpu=128\n'
     script+='#SBATCH --share\n'
+    script+='#SBATCH --gres=gpu\n'
     script+='module load python/3.5.1\n'
+    script+='. ~/.profile\n'
     script+='module load cuDNN/v7.2.1\n'
     script+='module load cuda/9.1.85\n'
     script+='module load pytorch/0.4.1\n'
@@ -109,7 +111,7 @@ def gen_all_scripts( root_path, built_binary_path, gen_scripts_path, final_resul
         os.mkdir(root_path + '/' + final_result_path)
 
     # for i in range(len(xml_file_list)):
-    for i in range(10):
+    for i in range(2):
         gen_script_for_each_xml(i, root_path,built_binary_path,
                                 gen_scripts_path, final_result_path)
 

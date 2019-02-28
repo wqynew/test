@@ -7,7 +7,7 @@ Created on Wed Feb 27 14:06:42 2019
 import argparse
 import sys
 import os
-import torch
+
     
 import multiprocessing as mp
 import threading as td
@@ -41,8 +41,7 @@ if __name__=='__main__':
     sys.stdout.write(str(args.ite))
     
     print (args.ite)
-    x = torch.empty(5, 3)
-    print('torch:',x)
+
     print('tensorflow:', tf.add(1, 2))
 
     st = time.time()
