@@ -79,9 +79,9 @@ def gen_script_for_each_xml(ite,root_path, built_binary_path, gen_scripts_path, 
     script+='module load cuDNN/v7.2.1\n'
     script+='module load cuda/9.1.85\n'
     script+='module load pytorch/0.4.1\n'
-    script+='module load tensorflow/1.11.0/cuda\n'
+    script+='module load tensorflow-python3\n'
     #script += '#SBATCH --mem-per-cpu=128\n'
-    script += 'python3 ' + root_path +'/' + built_binary_path + ' '
+    script += 'tensorflow ' + root_path +'/' + built_binary_path + ' '
     script += str(ite) + '\n'
 
     f.write(script)
